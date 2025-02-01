@@ -23,7 +23,7 @@ namespace eCommerce.API.Controllers
                 return BadRequest("Invalid registration data");
             }
 
-            AuthenticationResponse? authenticationResponse = await _usersService.Register(registerRequest);
+            AuthenticationResponse authenticationResponse = await _usersService.Register(registerRequest);
 
             if (authenticationResponse == null || authenticationResponse.Success == false)
             {
@@ -41,7 +41,7 @@ namespace eCommerce.API.Controllers
                 return BadRequest("Invalid login data");
             }
 
-            AuthenticationResponse? authenticationResponse = await _usersService.Login(loginRequest);
+            AuthenticationResponse authenticationResponse = await _usersService.Login(loginRequest);
 
             if (authenticationResponse == null || authenticationResponse.Success == false)
             {
