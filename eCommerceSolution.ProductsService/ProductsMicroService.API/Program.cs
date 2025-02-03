@@ -1,6 +1,22 @@
+using BusinessLogicLayer.Configurations;
+using DataAccessLayer.Configurations;
+using FluentValidation.AspNetCore;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+builder.Services.AddDataAccessLayer();
+builder.Services.AddBusinessLogicLayer();
+
+builder.Services.AddControllers();
+
+builder.Services.AddFluentValidationAutoValidation();
+
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
 
 app.Run();
