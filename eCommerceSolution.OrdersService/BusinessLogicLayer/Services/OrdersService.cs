@@ -144,7 +144,7 @@ public class OrdersService : IOrdersService
     }
 
 
-    public async Task<OrderResponse?> GetOrderByCondition(FilterDefinition<Order> filter)
+    public async Task<OrderResponse> GetOrderByCondition(FilterDefinition<Order> filter)
     {
         Order order = await _ordersRepository.GetOrderByCondition(filter);
         if (order == null)
