@@ -3,24 +3,26 @@
     "http": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "MONGODB_HOST": "localhost",
         "MONGODB_PORT": "27017"
-      },
-      "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5246"
+    },
+    "dotnetRunMessages": true,
+    "applicationUrl": "http://localhost:5246"
     },
     "https": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "MONGODB_HOST": "localhost",
         "MONGODB_PORT": "27017"
-      },
-      "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7107;http://localhost:5246"
+    },
+    "dotnetRunMessages": true,
+    "applicationUrl": "https://localhost:7107;http://localhost:5246"
     },
     "IIS Express": {
       "commandName": "IISExpress",

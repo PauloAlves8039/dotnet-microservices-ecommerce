@@ -24,7 +24,7 @@ public class OrdersController : ControllerBase
         return orders;
     }
 
-    [HttpGet]
+    [HttpGet("search/orderid/{orderID}")]
     public async Task<OrderResponse> GetOrderByOrderID(Guid orderID)
     {
         FilterDefinition<Order> filter = Builders<Order>.Filter.Eq(temp => temp.OrderID, orderID);
@@ -33,7 +33,7 @@ public class OrdersController : ControllerBase
         return order;
     }
 
-    [HttpGet]
+    [HttpGet("search/productid/{productID}")]
     public async Task<IEnumerable<OrderResponse>> GetOrdersByProductID(Guid productID)
     {
         FilterDefinition<Order> filter = Builders<Order>.Filter.ElemMatch(temp => temp.OrderItems,
@@ -43,10 +43,14 @@ public class OrdersController : ControllerBase
         return orders;
     }
 
-    [HttpGet]
+    [HttpGet("/search/orderDate/{orderDate}")]
     public async Task<IEnumerable<OrderResponse>> GetOrdersByOrderDate(DateTime orderDate)
     {
-        FilterDefinition<Order> filter = Builders<Order>.Filter.Eq(temp => temp.OrderDate.ToString("yyyy-MM-dd"), orderDate.ToString("yyyy-MM-dd"));
+        DateTime startOfDay = orderDate.Date;
+        DateTime endOfDay = orderDate.Date.AddDays(1).AddTicks(-1);
+
+        FilterDefinition<Order> filter = Builders<Order>.Filter.Gte(temp => temp.OrderDate, startOfDay) &
+                                         Builders<Order>.Filter.Lte(temp => temp.OrderDate, endOfDay);
 
         List<OrderResponse> orders = await _ordersService.GetOrdersByCondition(filter);
         return orders;
