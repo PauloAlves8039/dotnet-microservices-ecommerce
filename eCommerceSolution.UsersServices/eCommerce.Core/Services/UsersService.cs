@@ -17,9 +17,15 @@ public class UsersService : IUsersService
         _mapper = mapper;
     }
 
+    public async Task<UserDTO> GetUserByUserID(Guid userID)
+    {
+        var user = await _usersRepository.GetUserByUserID(userID);
+        return _mapper.Map<UserDTO>(user);
+    }
+
     public async Task<AuthenticationResponse> Login(LoginRequest loginRequest)
     {
-        ApplicationUser user = await _usersRepository.GetUserByEmailAndPassword(loginRequest.Email, loginRequest.Password);
+        var user = await _usersRepository.GetUserByEmailAndPassword(loginRequest.Email, loginRequest.Password);
 
         if (user == null) 
         {
@@ -39,7 +45,7 @@ public class UsersService : IUsersService
             Gender = registerRequest.Gender.ToString()
         };
 
-        ApplicationUser registeredUser = await _usersRepository.AddUser(user);
+        var registeredUser = await _usersRepository.AddUser(user);
 
         if (registeredUser == null)
         {
